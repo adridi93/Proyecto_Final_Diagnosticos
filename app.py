@@ -6,6 +6,7 @@ import seaborn as sns
 from scipy import stats
 import gdown
 import io
+import streamlit as st
 
 def load_data():
     # URL de tu archivo en Google Drive (asegúrate de que sea público o accesible)
