@@ -1,23 +1,25 @@
+import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
 import gdown
 import io
-import streamlit as st
 
+
+@st.cache(allow_output_mutation=True)
 def load_data():
-    # URL Google Drive
-    url = "https://drive.google.com/file/d/1HeXXHGnVjH6UFcX0vdQgBq2x_6sgblrW"
+    # URL archivo
+    url = "https://drive.google.com/uc?id=1HeXXHGnVjH6UFcX0vdQgBq2x_6sgblrW"
     
     # Descargar el archivo
     output = gdown.download(url, output=None, quiet=False)
     
     # Leer el archivo CSV
-    df = pd.read_csv(output, delimiter=',', on_bad_lines='skip', engine='python')
+    df = pd.read_csv(io.BytesIO(output), delimiter=',', on_bad_lines='skip')
     return df
+
 
 def main():
     st.title("Análisis de Datos de Salud")
