@@ -10,7 +10,7 @@ import streamlit as st
 
 def load_data():
     # URL Google Drive
-    url = "https://drive.google.com/file/d/1HeXXHGnVjH6UFcX0vdQgBq2x_6sgblrW/view?usp=sharing"
+    url = "https://drive.google.com/file/d/1HeXXHGnVjH6UFcX0vdQgBq2x_6sgblrW"
     
     # Descargar el archivo
     output = gdown.download(url, output=None, quiet=False)
