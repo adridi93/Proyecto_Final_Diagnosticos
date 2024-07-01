@@ -64,15 +64,7 @@ def main():
             fig = px.box(df, y=column, title=f'Box Plot de {column}')
         st.plotly_chart(fig)
 
-    # 4. Análisis de correlaciones
-    st.header("4. Análisis de correlaciones")
-    corr_matrix = df[num_cols].corr()
-    fig, ax = plt.subplots(figsize=(12, 10))
-    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
-    ax.set_title('Matriz de Correlación')
-    st.pyplot(fig)
-
-    # 5. Análisis temporal
+    # 4. Análisis temporal
     st.header("5. Análisis temporal")
     df['AdmissionStartDate'] = pd.to_datetime(df['AdmissionStartDate'])
     df['AdmissionEndDate'] = pd.to_datetime(df['AdmissionEndDate'])
@@ -87,7 +79,7 @@ def main():
     ax.set_title('Distribución del Tiempo desde la Última Admisión')
     st.pyplot(fig)
 
-    # 6. Análisis demográfico
+    # 5. Análisis demográfico
     st.header("6. Análisis demográfico")
     fig, ax = plt.subplots()
     sns.histplot(df['Edad'], ax=ax)
@@ -100,7 +92,7 @@ def main():
         ax.set_title(f'Distribución de {col}')
         st.pyplot(fig)
 
-    # 7. Análisis de diagnósticos
+    # 6. Análisis de diagnósticos
     st.header("7. Análisis de diagnósticos")
     fig, ax = plt.subplots(figsize=(12, 6))
     df['PrimaryDiagnosisChapter'].value_counts().plot(kind='bar', ax=ax)
@@ -108,7 +100,7 @@ def main():
     plt.xticks(rotation=45, ha='right')
     st.pyplot(fig)
 
-    # 8. Análisis de resultados de laboratorio
+    # 7. Análisis de resultados de laboratorio
     st.header("8. Análisis de resultados de laboratorio")
     lab_cols = [col for col in df.columns if col.startswith(('CBC:', 'METABOLIC:', 'URINALYSIS:'))]
     for col in lab_cols:
@@ -118,7 +110,7 @@ def main():
         ax.set_title(f'{col} por Capítulo de Diagnóstico Primario')
         st.pyplot(fig)
 
-    # 9. Detección de valores atípicos
+    # 8. Detección de valores atípicos
     st.header("9. Detección de valores atípicos")
     for col in num_cols:
         fig, ax = plt.subplots()
@@ -126,7 +118,7 @@ def main():
         ax.set_title(f'Box Plot de {col}')
         st.pyplot(fig)
 
-    # 10. Análisis de variables categóricas
+    # 9. Análisis de variables categóricas
     st.header("10. Análisis de variables categóricas")
     marital_status_cols = [col for col in df.columns if col.startswith('PatientMaritalStatus_')]
     for col in marital_status_cols:
