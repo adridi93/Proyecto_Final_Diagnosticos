@@ -118,14 +118,5 @@ def main():
         ax.set_title(f'Box Plot de {col}')
         st.pyplot(fig)
 
-    # 9. Análisis de variables categóricas
-    st.header("10. Análisis de variables categóricas")
-    marital_status_cols = [col for col in df.columns if col.startswith('PatientMaritalStatus_')]
-    for col in marital_status_cols:
-        fig, ax = plt.subplots()
-        df[col].value_counts().plot(kind='bar', ax=ax)
-        ax.set_title(f'Distribución de {col}')
-        st.pyplot(fig)
-
 if __name__ == "__main__":
     main()
