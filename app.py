@@ -9,7 +9,7 @@ import io
 
 def load_data():
     # URL de tu archivo en Google Drive (asegúrate de que sea público o accesible)
-    url = "https://drive.google.com/uc?id=1TVEuVSOOm8tqJd1r-1mC9aVOFTncqWG2"
+    url = "https://drive.google.com/file/d/1HeXXHGnVjH6UFcX0vdQgBq2x_6sgblrW/view?usp=sharing"
     
     # Descargar el archivo
     output = gdown.download(url, output=None, quiet=False)
