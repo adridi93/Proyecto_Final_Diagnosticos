@@ -33,21 +33,36 @@ def main():
     for col in cat_cols:
         st.write(f"Distribución de {col}:", df[col].value_counts(normalize=True))
 
-    # 3. Visualización de distribuciones
-    st.header("3. Visualización de distribuciones")
-    num_cols = df.select_dtypes(include=['float64', 'int64']).columns
+    # 3. Visualización interactiva
+    st.header("3. Visualización interactiva")
     
-    for col in num_cols:
-        fig, ax = plt.subplots()
-        sns.histplot(df[col], ax=ax)
-        ax.set_title(f'Distribución de {col}')
-        st.pyplot(fig)
-
-    for col in cat_cols:
-        fig, ax = plt.subplots()
-        df[col].value_counts().plot(kind='bar', ax=ax)
-        ax.set_title(f'Distribución de {col}')
-        st.pyplot(fig)
+    # Selección de tipo de gráfico
+    chart_type = st.selectbox("Selecciona el tipo de gráfico", 
+                              ["Histograma", "Scatter Plot", "Box Plot"])
+    
+    # Selección de columnas
+    numeric_columns = df.select_dtypes(include=['float64', 'int64']).columns.tolist()
+    
+    if chart_type == "Histograma":
+        column = st.selectbox("Selecciona una columna para el histograma", numeric_columns)
+        fig = px.histogram(df, x=column, title=f'Distribución de {column}')
+        st.plotly_chart(fig)
+    
+    elif chart_type == "Scatter Plot":
+        x_column = st.selectbox("Selecciona la columna para el eje X", numeric_columns)
+        y_column = st.selectbox("Selecciona la columna para el eje Y", numeric_columns)
+        fig = px.scatter(df, x=x_column, y=y_column, title=f'{x_column} vs {y_column}')
+        st.plotly_chart(fig)
+    
+    elif chart_type == "Box Plot":
+        column = st.selectbox("Selecciona una columna para el box plot", numeric_columns)
+        category_columns = df.select_dtypes(include=['object']).columns.tolist()
+        group_by = st.selectbox("Agrupar por (opcional)", ["Ninguno"] + category_columns)
+        if group_by != "Ninguno":
+            fig = px.box(df, x=group_by, y=column, title=f'Box Plot de {column} agrupado por {group_by}')
+        else:
+            fig = px.box(df, y=column, title=f'Box Plot de {column}')
+        st.plotly_chart(fig)
 
     # 4. Análisis de correlaciones
     st.header("4. Análisis de correlaciones")
