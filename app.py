@@ -9,7 +9,7 @@ import io
 import streamlit as st
 
 def load_data():
-    # URL de tu archivo en Google Drive (asegúrate de que sea público o accesible)
+    # URL Google Drive
     url = "https://drive.google.com/file/d/1HeXXHGnVjH6UFcX0vdQgBq2x_6sgblrW/view?usp=sharing"
     
     # Descargar el archivo
