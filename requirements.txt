@@ -7,3 +7,4 @@ scikit-learn
 tensorflow
 gdown
 plotly
+statsmodels
